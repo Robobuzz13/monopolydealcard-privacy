@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Monopoly Deal Card — Legal & Privacy</title>
+  <meta name="description" content="Privacy policy, data deletion and legal pages for Monopoly Deal Card Game." />
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#d4af37; /* gold */
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071025 0%, #0f1724 100%);color:#e6eef6}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:40px}
+    .card{
+      width:min(980px,96%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+      padding:28px;
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:22px;
+      align-items:start;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .brand{
+      display:flex;gap:16px;align-items:center;
+    }
+    .logo{
+      width:84px;height:84px;border-radius:14px;background:linear-gradient(135deg,#101826, #122433);
+      display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6) inset;
+      font-weight:800;color:var(--accent);font-size:34px;
+      flex-shrink:0;
+      overflow:hidden;
+    }
+    .logo img{ width:72px; height:72px; object-fit:contain; display:block; }
+
+    h1{margin:0;font-size:22px;letter-spacing:0.2px}
+    p.lead{color:var(--muted);margin-top:8px;line-height:1.45}
+
+    .content{
+      padding-top:6px;
+    }
+
+    .buttons{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .btn{
+      padding:10px 14px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.04);
+      color:inherit;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:10px;
+      transition:all .14s ease;
+    }
+    .btn:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(2,6,23,0.6)}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(212,175,55,0.13), rgba(212,175,55,0.06));
+      border:1px solid rgba(212,175,55,0.15);
+      color:var(--accent)
+    }
+
+    .right{
+      padding:18px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+      display:flex;flex-direction:column;gap:10px;
+      min-height:160px;justify-content:center;
+    }
+    .meta{color:var(--muted);font-size:13px}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+    @media (max-width:840px){
+      .card{grid-template-columns:1fr; padding:18px}
+      .right{order:2}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+      <div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <!-- External logo image: /DealMasterLogo.png -->
+            <img src="/DealMasterLogo.png" alt="Deal Master logo">
+          </div>
+
+          <div>
+            <h1>Monopoly Deal Card Game</h1>
+            <p class="lead">Official privacy & legal pages for the Monopoly Deal Card Game mobile experience.</p>
+          </div>
+        </div>
+
+        <div class="content">
+          <p>Welcome — these pages describe how we use and delete user data for the Monopoly Deal Card Game. Use the links below to view or request deletion of your data.</p>
+
+          <div class="buttons">
+            <a class="btn primary" href="/privacy-policy.html" aria-label="Open Privacy Policy">🔒 Privacy Policy</a>
+            <a class="btn" href="/data-deletion.html" aria-label="Open Data Deletion Instructions">🗑️ Data Deletion</a>
+            <a id="contactBtn" class="btn" href="#" aria-label="Contact Email">✉️ Contact</a>
+          </div>
+
+          <footer>
+            <div class="meta">App ID: <strong>Monopoly Deal Card</strong> — Maintained by JBUsEntertainment</div>
+          </footer>
+        </div>
+      </div>
+
+      <aside class="right" aria-label="Legal quick info">
+        <div><strong>Quick facts</strong></div>
+        <div class="meta">Auth providers: Facebook & Google (via Firebase Auth). </div>
+        <div class="meta">If you want your account removed, visit the Data Deletion page or email <a id="contactEmail" href="#" style="color:var(--accent);text-decoration:none"></a>.</div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px">Last updated: <strong id="updated">—</strong></div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // CONFIGURE THESE VALUES
+    const contactEmail = "customersupport@jbusentertainment.com"; // updated contact email
+
+    // auto-fill contact email links
+    const emailLink = "mailto:" + contactEmail;
+    const contactBtn = document.getElementById("contactBtn");
+    const contactEmailEl = document.getElementById("contactEmail");
+    contactBtn.setAttribute("href", emailLink);
+    contactEmailEl.setAttribute("href", emailLink);
+    contactEmailEl.textContent = contactEmail;
+
+    // auto-fill last-updated to current date (localized)
+    const updatedEl = document.getElementById("updated");
+    const now = new Date();
+    const iso = now.toISOString().split('T')[0];
+    const human = now.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    updatedEl.textContent = human + " (" + iso + ")";
+  </script>
+</body>
+</html>
